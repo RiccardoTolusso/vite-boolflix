@@ -23,7 +23,12 @@ export const store = reactive({
         results: [],
         total_pages: 0,
         total_results: 0
-    }
+    },
+
+    // IMAGES HANDLING
+    imageUrl: "https://image.tmdb.org/t/p/w185",
+
+
 
     // LISTS OF OPTIONS
     // languages:{

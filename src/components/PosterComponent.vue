@@ -1,16 +1,19 @@
 <script>
+import { store } from '../storage';
+
 export default{
     name: 'Film',
     data(){
         return {
-            
+            store
         }
     },
     props: {
         title: String,
         originalTitle: String,
         langauge: String,
-        score: Number
+        score: Number,
+        posterImage: String
     }
 }
 </script>
@@ -28,6 +31,7 @@ export default{
     <div>
         {{ score }}
     </div>
+    <img :src="store.imageUrl+posterImage" alt="">
     <hr>
 </template>
 <style></style>
