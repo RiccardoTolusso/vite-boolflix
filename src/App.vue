@@ -1,7 +1,12 @@
 <script>
+// only source of truth
 import {store} from './storage'
+
+// axios
 import axios from 'axios'
 
+// models
+import MainComponent from './components/MainComponent.vue'
 
 export default{
   name:'MyApp',
@@ -12,6 +17,9 @@ export default{
   },
   methods: {
     apiCall(){
+      if (!this.store.query){
+        return
+      }
       axios.get(`${this.store.apiUrl}/${this.store.category}`, {
         params:{
           api_key: this.store.key,
@@ -30,6 +38,9 @@ export default{
       })
     }
   },
+  components: {
+    MainComponent,
+  },
   created(){
     // axios.get(this.generateApiUrl())
     this.apiCall()
@@ -39,5 +50,6 @@ export default{
 <template>
   <!-- HEADER -->
   <!-- MAIN -->
+  <MainComponent @search-again="apiCall"/>
 </template>
 <!-- <style></style> -->
