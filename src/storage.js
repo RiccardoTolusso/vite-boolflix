@@ -26,7 +26,7 @@ export const store = reactive({
     },
 
     // IMAGES HANDLING
-    imageUrl: "https://image.tmdb.org/t/p/w185",
+    imageUrl: "https://image.tmdb.org/t/p/w342",
 
 
 

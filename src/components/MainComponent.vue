@@ -26,8 +26,8 @@ export default{
         :title="film.title"
         :original-title="film.original_title"
         :langauge="film.original_language"
-        :score="film.vote_average"
         :posterImage="film.poster_path"
+        :usersVote="film.vote_average"
         />
     </li>
 
@@ -37,8 +37,8 @@ export default{
         :title="tvShow.name"
         :original-title="tvShow.original_name"
         :langauge="tvShow.original_language"
-        :score="tvShow.vote_average"
         :posterImage="tvShow.poster_path"
+        :usersVote="tvShow.vote_average"
         />
     </li>
 </ul>
