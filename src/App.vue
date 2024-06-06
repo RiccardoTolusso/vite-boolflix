@@ -7,6 +7,7 @@ import axios from 'axios'
 
 // models
 import MainComponent from './components/MainComponent.vue'
+import HeaderComponent from './components/HeaderComponent.vue'
 
 export default{
   name:'MyApp',
@@ -42,6 +43,7 @@ export default{
   },
   components: {
     MainComponent,
+    HeaderComponent
   },
   created(){
     // axios.get(this.generateApiUrl())
@@ -51,7 +53,8 @@ export default{
 </script>
 <template>
   <!-- HEADER -->
+  <HeaderComponent @search-again="apiCall"/>
   <!-- MAIN -->
-  <MainComponent @search-again="apiCall"/>
+  <MainComponent />
 </template>
 <!-- <style></style> -->

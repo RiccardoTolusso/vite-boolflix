@@ -53,7 +53,8 @@ export default{
     <div>
         {{ langauge }}
     </div>
-    <img :src="store.imageUrl+posterImage" alt="">
+    <img v-if="posterImage != null" :src="store.imageUrl+posterImage" :alt="`${originalTitle} Poster`">
+    <img v-else src="../images/poster-default.jpg" :alt="`${originalTitle} Poster`">
     <div v-for="n in roundedVote">
         <font-awesome-icon icon="fa-solid fa-star" />
     </div>

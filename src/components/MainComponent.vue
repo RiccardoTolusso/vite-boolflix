@@ -16,9 +16,6 @@ export default{
 }
 </script>
 <template>
-<input type="text" v-model="store.query">
-<button @click="$emit('search-again')">Search</button>
-
 <ul>
     <!-- FILMS -->
     <li v-for="film in store.movie.results">
