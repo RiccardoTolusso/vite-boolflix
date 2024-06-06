@@ -20,21 +20,23 @@ export default{
       if (!this.store.query){
         return
       }
-      axios.get(`${this.store.apiUrl}/${this.store.category}`, {
-        params:{
-          api_key: this.store.key,
-          query: this.store.query,
-          language: this.store.language,
-          include_adult: this.store.adult,
-          page: this.store.page
-        }
-      })
-      .then((result) => {
-        console.log(result)
-        this.store.currentPage = result.data.page;
-        this.store.results = result.data.results;
-        this.store.total_pages = result.data.total_pages;
-        this.store.total_results = result.data.total_results;
+      this.store.categories.forEach((category) => {
+        axios.get(`${this.store.apiUrl}/${category}`, {
+          params:{
+            api_key: this.store.key,
+            query: this.store.query,
+            language: this.store.language,
+            include_adult: this.store.adult,
+            page: this.store.page
+          }
+        })
+        .then((result) => {
+          console.log(result)
+          this.store[category].currentPage = result.data.page;
+          this.store[category].results = result.data.results;
+          this.store[category].total_pages = result.data.total_pages;
+          this.store[category].total_results = result.data.total_results;
+        })
       })
     }
   },

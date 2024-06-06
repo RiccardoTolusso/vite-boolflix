@@ -2,7 +2,9 @@
 export default{
     name: 'Film',
     data(){
-
+        return {
+            
+        }
     },
     props: {
         title: String,
