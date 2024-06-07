@@ -34,16 +34,19 @@ export default{
         getMovieData(dataType){
             const movieUrl = this.store.apiMovieUrl 
             const movieId = this.store.filmToDisplay.defaultData.id
-            const params = {
-                api_key: this.store.key,
-                language: this.store.language,
-            } 
-            axios.get(movieUrl + movieId + "/" + dataType, {params}).then(
-                (response) => {
-                    this.store.filmToDisplay[dataType] = response.data
+            if (movieId !== undefined){
 
-                }
-            )
+                const params = {
+                    api_key: this.store.key,
+                    language: this.store.language,
+                } 
+                axios.get(movieUrl + movieId + "/" + dataType, {params}).then(
+                    (response) => {
+                        this.store.filmToDisplay[dataType] = response.data
+    
+                    }
+                )
+            }
         }
     },
     beforeUpdate(){

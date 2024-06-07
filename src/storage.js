@@ -29,7 +29,7 @@ export const store = reactive({
     // IMAGES HANDLING
     profileImageUrl: "https://image.tmdb.org/t/p/w185",
     imageUrl: "https://image.tmdb.org/t/p/w342",
-    backdropImageUrl: "https://image.tmdb.org/t/p/original",
+    backdropImageUrl: "https://image.tmdb.org/t/p/w1280",
 
 
     // LISTS OF AVAILABLE FLAGS
