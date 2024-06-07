@@ -16,7 +16,9 @@ export default{
     updated(){
         if (this.store.movie.currentPage === 1){
             this.$refs.film.scrollTo({top:0, left:0, behaviour:'instant'})
-                this.$refs.tvShow.scrollTo({top:0, left:0, behaviour:'instant'})
+        }
+        if (this.store.tv.currentPage === 1){
+            this.$refs.tvShow.scrollTo({top:0, left:0, behaviour:'instant'})
         }
     }
 
