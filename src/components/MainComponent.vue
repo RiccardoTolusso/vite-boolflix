@@ -12,7 +12,7 @@ export default{
     components: {
     PosterComponent
 },
-    emits: ['search-again']
+    emits: ['search-again', 'load-more']
 }
 </script>
 <template>
@@ -29,7 +29,11 @@ export default{
             :posterImage="film.poster_path"
             :usersVote="film.vote_average"
             :overview="film.overview"
+            :ref="`film-${id}`"
             />
+        </li>
+        <li>
+            <img class="add-more" src="../images/load-more.jpg" alt="load more image" @click="this.$emit('load-more', 'movie')">
         </li>
     </ul>
     
@@ -44,7 +48,10 @@ export default{
             :posterImage="tvShow.poster_path"
             :usersVote="tvShow.vote_average"
             :overview="tvShow.overview"
-            />
+            :ref="`tv-show-${id}`"/>
+        </li>
+        <li>
+            <img class="add-more" src="../images/load-more.jpg" alt="load more image" @click="this.$emit('load-more', 'tv')">
         </li>
     </ul>
 </main>
@@ -93,6 +100,18 @@ ul{
     li{
         width: calc(100%/5);
         flex-shrink: 0;
+        img.add-more {
+            height: 0px;
+            min-height: 100%;
+            width: 100%;
+            cursor: pointer;
+            border: 0px;
+            transition: border 0.3s;
+
+            &:hover{
+                border: 5px solid white;
+            }
+        }
     }
 }
 </style>

@@ -20,7 +20,7 @@ export default{
     }
   },
   methods: {
-    apiCall(){
+    startNewSearch(){
       if (!this.store.query){
         return
       }
@@ -42,6 +42,34 @@ export default{
           this.store[category].total_results = result.data.total_results;
         })
       })
+    },
+
+    // constolla se ci sono altre pagine da caricare e carica anche la successiva
+    loadMore(category){
+      if (!this.store.query || this.store[category] == null){
+        return
+      }
+      
+      if (this.store[category].currentPage < this.store[category].total_pages){
+        // se ci sono altre pagine da caricare
+        axios.get(`${this.store.apiUrl}/${category}`, {
+          params:{
+            api_key: this.store.key,
+            query: this.store.query,
+            language: this.store.language,
+            include_adult: this.store.adult,
+            page: this.store[category].currentPage + 1
+          }
+        })
+        .then((result) => {
+          console.log(result)
+          this.store[category].currentPage = result.data.page;
+          this.store[category].results = this.store[category].results.concat(result.data.results);
+          this.store[category].total_pages = result.data.total_pages;
+          this.store[category].total_results = result.data.total_results;
+        })
+      }
+      
     }
   },
   components: {
@@ -50,15 +78,15 @@ export default{
   },
   created(){
     // axios.get(this.generateApiUrl())
-    this.apiCall()
+    this.startNewSearch()
   }
 }
 </script>
 <template>
   <!-- HEADER -->
-  <HeaderComponent @search-again="apiCall"/>
+  <HeaderComponent @search-again="startNewSearch"/>
   <!-- MAIN -->
-  <MainComponent />
+  <MainComponent @load-more="loadMore"/>
 </template>
 <style>
 body{

@@ -1,6 +1,8 @@
 <script>
 import { store } from '../storage';
 
+import { ref } from 'vue'
+
 // FONT AWESOME
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -66,8 +68,11 @@ export default{
     },
     beforeUpdate(){
         // quando sta per venire aggiornata la scheda se il titolo non è uno dei 2 titoli corretti allora lo reimposto
+        // questo avviene solo quando avvio una nuova ricerca e non quando aggiungo dati
         if (this.shownTitle !== this.originalTitle && this.shownTitle !== this.title){
             this.shownTitle = this.title
+            console.log(this.$refs)
+            
         }
     }
 }
@@ -109,7 +114,6 @@ export default{
 
 <style lang="scss" scoped>
 .poster{
-    background-color: red;
     position: relative;
     height: 100%;
     user-select: none;
@@ -119,6 +123,7 @@ export default{
     .info{
         position: absolute;
         height: 100%;
+        width: 100%;
         background-color: rgba(0, 0, 0, 0.666);
         color: white;
         opacity: 0;
@@ -167,7 +172,6 @@ export default{
     // IMMAGINE GRANDE DI COPERTINA
     img.posterImg{
         display: block;
-        height: 100%;
         height: 100%;
         width: 100%;
     }
