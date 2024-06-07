@@ -16,30 +16,83 @@ export default{
 }
 </script>
 <template>
-<ul>
+<main>
+
     <!-- FILMS -->
-    <li v-for="film in store.movie.results">
-        <PosterComponent 
-        :title="film.title"
-        :original-title="film.original_title"
-        :langauge="film.original_language"
-        :posterImage="film.poster_path"
-        :usersVote="film.vote_average"
-        />
-    </li>
-
+    <h2>Film</h2>
+    <ul>
+        <li v-for="(film, id) in store.movie.results" :key="`film-${id}`">
+            <PosterComponent 
+            :title="film.title"
+            :original-title="film.original_title"
+            :language="film.original_language"
+            :posterImage="film.poster_path"
+            :usersVote="film.vote_average"
+            :overview="film.overview"
+            />
+        </li>
+    </ul>
+    
     <!-- TV SHOWS -->
-    <li v-for="tvShow in store.tv.results">
-        <PosterComponent
-        :title="tvShow.name"
-        :original-title="tvShow.original_name"
-        :langauge="tvShow.original_language"
-        :posterImage="tvShow.poster_path"
-        :usersVote="tvShow.vote_average"
-        />
-    </li>
-</ul>
-</template>
-<style scoped>
+    <h2>Serie Tv</h2>
+    <ul>
+        <li v-for="(tvShow, id) in store.tv.results" :key="`tv-show-${id}`">
+            <PosterComponent
+            :title="tvShow.name"
+            :original-title="tvShow.original_name"
+            :langauge="tvShow.original_language"
+            :posterImage="tvShow.poster_path"
+            :usersVote="tvShow.vote_average"
+            :overview="tvShow.overview"
+            />
+        </li>
+    </ul>
+</main>
 
+</template>
+
+<style scoped>
+@media screen and (max-width: 800px) {
+    li{
+        width: calc(100% / 4) !important;
+    }
+}
+@media screen and (max-width: 630px) {
+    li{
+        width: calc(100% / 3) !important;
+    }
+}
+@media screen and (max-width: 430px) {
+    li{
+        width: calc(100% / 2) !important;
+    }
+}
+
+main{
+    
+    width: 90vw;
+    margin: 0 auto;
+}
+
+h2{
+    color: white;
+}
+
+ul{
+    display: flex;
+    margin-bottom: 2vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x;
+
+    &::-webkit-scrollbar{
+        display: none;
+    }
+
+
+    li{
+        width: calc(100%/5);
+        flex-shrink: 0;
+    }
+}
 </style>

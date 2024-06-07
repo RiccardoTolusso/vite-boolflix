@@ -6,7 +6,7 @@ export const store = reactive({
     key: "9d0f3fa0c8ae5773b297afa984c0304c",
     categories: ['movie', 'tv'], // movie / tv / multi
     query: "le",
-    language: 'en-US',
+    language: 'it-IT',
     page: 1,
     adult: false,
 
@@ -30,16 +30,10 @@ export const store = reactive({
 
 
 
-    // LISTS OF OPTIONS
-    // languages:{
-    //     italian: {
-    //         code: 'it-IT',
-    //         image: null
-    //     },
-    //     english: {
-    //         code: 'en-US',
-    //         image: null
-    //     },
-    // },
+    // LISTS OF AVAILABLE FLAGS
+    flags:{
+        it: "it.svg",
+        en: "en.svg",
+    },
 
 })

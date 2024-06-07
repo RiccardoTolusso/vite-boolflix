@@ -1,4 +1,7 @@
 <script>
+// roboto
+import "@fontsource/roboto";
+
 // only source of truth
 import {store} from './storage'
 
@@ -57,4 +60,8 @@ export default{
   <!-- MAIN -->
   <MainComponent />
 </template>
-<!-- <style></style> -->
+<style>
+body{
+  font-family: "Roboto";
+}
+</style>

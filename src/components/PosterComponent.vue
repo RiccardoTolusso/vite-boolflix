@@ -21,7 +21,9 @@ export default{
     name: 'Film',
     data(){
         return {
-            store
+            store,
+            shownTitle: this.title,
+            flagsUrl: "./flags_svg/"
         }
     },
     components:{
@@ -30,37 +32,145 @@ export default{
     props: {
         title: String,
         originalTitle: String,
-        langauge: String,
+        language: String,
         posterImage: String,
+        overview:String,
         usersVote: Number
     },
     computed:{
         roundedVote(){
             // porto il numero in scala 1 a 5 e lo arrotondo per eccesso
             return Math.ceil(this.usersVote/2);
+        },
+        flagExist(){
+            // controlla se esiste una bandiera nello store per la lingua di riferimento
+            const flag = this.store.flags[this.language]
+            if (flag != null){
+                return true 
+            }
+            else{
+                return false
+            }
+        }
+    },
+    methods:{
+        switchTitle(){
+            // al clik sul titolo scambio il titolo tradotto con quello originale e viceversa
+            if (this.shownTitle === this.title){
+                this.shownTitle = this.originalTitle
+            } else {
+                this.shownTitle = this.title
+            }
+            console.log("switch")
+        }
+    },
+    beforeUpdate(){
+        // quando sta per venire aggiornata la scheda se il titolo non è uno dei 2 titoli corretti allora lo reimposto
+        if (this.shownTitle !== this.originalTitle && this.shownTitle !== this.title){
+            this.shownTitle = this.title
         }
     }
 }
 </script>
 <template>
-    <hr>
-    <div>
-        {{ title }}
+    <div class="poster">
+
+        <!-- INFORMATION PAGE -->
+        <div class="info">
+    
+            <!-- TITOLO DEL FILM -->
+            <h4 @click="switchTitle" >{{ shownTitle }}</h4>
+            
+            <!-- DESCRIZIONE DEL FILM -->
+            <p> {{ overview }} </p>
+
+            <!-- BANDIERA O TESTO DELLA LINGUA -->
+            <img class="lang" v-if="flagExist" :src="this.flagsUrl + this.store.flags[this.language]"/>
+            <div class="lang" v-else>{{ this.language }}</div>
+    
+            <!-- STARS -->
+            <div class="stars">
+                <div v-for="n in roundedVote">
+                    <font-awesome-icon icon="fa-solid fa-star" />
+                </div>
+                <div v-for="n in (5 - roundedVote)">
+                    <font-awesome-icon icon="fa-regular fa-star" />
+                </div>
+            </div>
+    
+        </div>
+    
+        <!-- FRONT IMAGE -->
+        <img class="posterImg" v-if="posterImage != null" :src="store.imageUrl+posterImage" :alt="`${originalTitle} Poster`">
+        <img class="posterImg" v-else src="../images/poster-default.jpg" :alt="`${originalTitle} Poster`">
     </div>
-    <div>
-        {{ originalTitle }}
-    </div>
-    <div>
-        {{ langauge }}
-    </div>
-    <img v-if="posterImage != null" :src="store.imageUrl+posterImage" :alt="`${originalTitle} Poster`">
-    <img v-else src="../images/poster-default.jpg" :alt="`${originalTitle} Poster`">
-    <div v-for="n in roundedVote">
-        <font-awesome-icon icon="fa-solid fa-star" />
-    </div>
-    <div v-for="n in (5 - roundedVote)">
-        <font-awesome-icon icon="fa-regular fa-star" />
-    </div>
-    <hr>
+    
 </template>
-<style></style>
+
+<style lang="scss" scoped>
+.poster{
+    background-color: red;
+    position: relative;
+    height: 100%;
+    user-select: none;
+    cursor: pointer;
+    
+    // BLOCCO CONTENENTE LE INFO CHE APPAIONO ON HOVER
+    .info{
+        position: absolute;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.666);
+        color: white;
+        opacity: 0;
+        transition: opacity 0.4s;
+        padding: 10px;
+        text-align: center;
+        scroll-snap-align: start;
+        &:hover{
+            opacity: 1;
+        }
+
+        // TITOLO DEL FILM
+        h4{
+            margin-top: 10px;
+            height: 20%;
+        } 
+
+        //LINGUA DEL FILM
+        .lang{
+            margin-bottom: 10px;
+            height: 10%;
+        }
+
+        // DESCRIZIONE DEL FILM
+        p{
+            height: 50%;
+            overflow: auto;
+            text-align: justify;
+            text-align-last: center;
+            margin-bottom: 10px;
+
+            &::-webkit-scrollbar{
+                display: none;
+            }
+        }
+
+        // STELLE
+        .stars{
+            div{
+                display: inline-block;
+            }
+        }
+
+    }
+
+    // IMMAGINE GRANDE DI COPERTINA
+    img.posterImg{
+        display: block;
+        height: 100%;
+        height: 100%;
+        width: 100%;
+    }
+}
+
+</style>
