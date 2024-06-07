@@ -1,8 +1,6 @@
 <script>
 import { store } from '../storage';
 
-import { ref } from 'vue'
-
 // FONT AWESOME
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -37,7 +35,7 @@ export default{
         language: String,
         posterImage: String,
         overview:String,
-        usersVote: Number
+        usersVote: Number,
     },
     computed:{
         roundedVote(){
@@ -82,7 +80,7 @@ export default{
         <div class="info">
     
             <!-- TITOLO DEL FILM -->
-            <h4 @click="switchTitle" >{{ shownTitle }}</h4>
+            <h4 @click.stop="switchTitle" >{{ shownTitle }}</h4>
             
             <!-- DESCRIZIONE DEL FILM -->
             <p> {{ overview }} </p>

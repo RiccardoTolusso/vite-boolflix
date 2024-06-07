@@ -35,7 +35,6 @@ export default{
           }
         })
         .then((result) => {
-          console.log(result)
           this.store[category].currentPage = result.data.page;
           this.store[category].results = result.data.results;
           this.store[category].total_pages = result.data.total_pages;
@@ -62,7 +61,6 @@ export default{
           }
         })
         .then((result) => {
-          console.log(result)
           this.store[category].currentPage = result.data.page;
           this.store[category].results = this.store[category].results.concat(result.data.results);
           this.store[category].total_pages = result.data.total_pages;
@@ -86,9 +84,14 @@ export default{
   <!-- HEADER -->
   <HeaderComponent @search-again="startNewSearch"/>
   <!-- MAIN -->
-  <MainComponent @load-more="loadMore"/>
+  <MainComponent @load-more="loadMore" ref="mainComponent"/>
 </template>
 <style>
+#app{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
 body{
   font-family: "Roboto";
 }

@@ -3,6 +3,7 @@ import { reactive } from 'vue';
 export const store = reactive({
     // API CALL SETTINGS
     apiUrl:"https://api.themoviedb.org/3/search",  
+    apiMovieUrl: "https://api.themoviedb.org/3/movie/",
     key: "9d0f3fa0c8ae5773b297afa984c0304c",
     categories: ['movie', 'tv'], // movie / tv / multi
     query: "le",
@@ -26,8 +27,9 @@ export const store = reactive({
     },
 
     // IMAGES HANDLING
+    profileImageUrl: "https://image.tmdb.org/t/p/w185",
     imageUrl: "https://image.tmdb.org/t/p/w342",
-
+    backdropImageUrl: "https://image.tmdb.org/t/p/original",
 
 
     // LISTS OF AVAILABLE FLAGS
@@ -36,4 +38,12 @@ export const store = reactive({
         en: "en.svg",
     },
 
+
+    // FULL SCREEN INFO PAGE
+    displayFilmInfo: false,
+    filmToDisplay: {
+        defaultData: {},
+        credits: {},
+        recommendations: {}
+    }
 })
