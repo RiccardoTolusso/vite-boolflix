@@ -10,18 +10,26 @@ export default{
         }
     },
     components: {
-    PosterComponent
-},
-    emits: ['search-again', 'load-more']
+        PosterComponent
+    },
+    emits: ['search-again', 'load-more'],
+    updated(){
+        if (this.store.movie.currentPage === 1){
+            this.$refs.film.scrollTo({top:0, left:0, behaviour:'instant'})
+                this.$refs.tvShow.scrollTo({top:0, left:0, behaviour:'instant'})
+        }
+    }
+
 }
+
 </script>
 <template>
 <main>
 
     <!-- FILMS -->
     <h2>Film</h2>
-    <ul>
-        <li v-for="(film, id) in store.movie.results" :key="`film-${id}`">
+    <ul ref="film">
+        <li v-for="(film, id) in store.movie.results" :key="`film-${id}`" >
             <PosterComponent 
             :title="film.title"
             :original-title="film.original_title"
@@ -29,7 +37,6 @@ export default{
             :posterImage="film.poster_path"
             :usersVote="film.vote_average"
             :overview="film.overview"
-            :ref="`film-${id}`"
             />
         </li>
         <li>
@@ -39,7 +46,7 @@ export default{
     
     <!-- TV SHOWS -->
     <h2>Serie Tv</h2>
-    <ul>
+    <ul ref="tvShow">
         <li v-for="(tvShow, id) in store.tv.results" :key="`tv-show-${id}`">
             <PosterComponent
             :title="tvShow.name"
@@ -48,7 +55,7 @@ export default{
             :posterImage="tvShow.poster_path"
             :usersVote="tvShow.vote_average"
             :overview="tvShow.overview"
-            :ref="`tv-show-${id}`"/>
+            />
         </li>
         <li>
             <img class="add-more" src="../images/load-more.jpg" alt="load more image" @click="this.$emit('load-more', 'tv')">

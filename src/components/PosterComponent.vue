@@ -70,11 +70,9 @@ export default{
         // quando sta per venire aggiornata la scheda se il titolo non è uno dei 2 titoli corretti allora lo reimposto
         // questo avviene solo quando avvio una nuova ricerca e non quando aggiungo dati
         if (this.shownTitle !== this.originalTitle && this.shownTitle !== this.title){
-            this.shownTitle = this.title
-            console.log(this.$refs)
-            
+            this.shownTitle = this.title            
         }
-    }
+    },
 }
 </script>
 <template>
