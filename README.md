@@ -30,3 +30,19 @@ Trasformiamo quello che abbiamo fatto fino ad ora in una vera e propria webapp, 
 Un header che contiene logo e search bar
 Dopo aver ricercato qualcosa nella searchbar, i risultati appaiono sotto forma di “card” in cui lo sfondo è rappresentato dall’immagine di copertina (consiglio la poster_path con w342)
 Andando con il mouse sopra una card (on hover), appaiono le informazioni aggiuntive già prese nei punti precedenti più la overview
+
+**FUNZIONI BONUS**
+
+ - cliccando sui titoli dei film questi cambiano dall'originale al tradotto e viceversa (salvo che coincidano)
+ - al click sul resto della card del film si apre un pannello informativo a tutto schermo con le info del film
+ - il pannello contiene anche i primi 5 attori per importanza del ruolo nel film
+ - i primi 8 film suggeriti dall'api TMDB
+ - al click sui suggeriti la pagina di INFO passa al film cliccato
+
+**FUNZIONI DA IMPLEMENTARE**
+*IN ORDINE DI IMPORTANZA:*
+    1. Al click sulle card delle serie tv si deve comportare come per i film
+    2. All'apertura del sito o quando si preme il logo boolfix dovrebbe mostrare i film e le serie tv più popolari al momento
+    3. Quando il riusltato della ricerca è nullo visualizzare una schermata apposita
+    4. Dare la possibilità all'utente di filtrare i film e le serie tv per categoria
+   
