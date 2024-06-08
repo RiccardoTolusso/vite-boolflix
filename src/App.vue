@@ -53,14 +53,14 @@ export default{
 
     // constolla se ci sono altre pagine da caricare e carica anche la successiva
     loadMore(category){
-      const urlForApiCall = this.getApiCallUrl()
-      if (!this.store.query || this.store[category] == null){
+      const urlForApiCall = this.getApiCallUrl(category)
+      if ( this.store[category] == null){
         return
       }
       
       if (this.store[category].currentPage < this.store[category].total_pages){
         // se ci sono altre pagine da caricare
-        axios.get(`${urlForApiCall}/${category}`, {
+        axios.get(`${urlForApiCall}`, {
           params:{
             api_key: this.store.key,
             query: this.store.query,

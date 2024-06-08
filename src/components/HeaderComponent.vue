@@ -27,13 +27,19 @@ export default {
     ],
     components:{  
         'font-awesome-icon': FontAwesomeIcon
+    },
+    methods:{
+        resetToHomePage(){
+            this.store.query = "";
+            this.$emit("search-again")
+        }
     }
 }
 </script>
 
 <template>
 <header>
-    <h1>Boolflix</h1>
+    <h1 @click="resetToHomePage">Boolflix</h1>
     <div>
         <input @keydown.enter="$emit('search-again')" type="text" v-model="store.query" >
         <font-awesome-icon icon="fa-solid fa-magnifying-glass"  @click="$emit('search-again')"/>
@@ -54,6 +60,7 @@ header{
     h1{
         color: $title-color;
         display: inline-block;
+        cursor: pointer;
     }
 
     div{
