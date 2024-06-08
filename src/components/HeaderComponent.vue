@@ -70,9 +70,11 @@ header{
             font-size: calc(1rem + 1vw);
             color: white;
             text-transform: capitalize;
-            
-            &:focus-within{
-                border: 0;
+            padding: 5px;
+
+            &:focus-visible{
+                outline: 0;
+
             }
         }
 

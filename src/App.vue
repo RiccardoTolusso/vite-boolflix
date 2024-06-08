@@ -20,12 +20,20 @@ export default{
     }
   },
   methods: {
-    startNewSearch(){
-      if (!this.store.query){
-        return
+    getApiCallUrl(category){
+      if (this.store.query === ""){
+        // se la query è vuota quindi nessuno ha cercato nulla mostro i più popolari
+        return this.store.apiPosterInfo + category + "/popular"
+        
+      } else {
+        // e l'utente ha inserito qualcosa
+        return this.store.apiSearch + "/" + category
       }
+    },
+    startNewSearch(){
       this.store.categories.forEach((category) => {
-        axios.get(`${this.store.apiUrl}/${category}`, {
+        const urlForApiCall = this.getApiCallUrl(category)
+        axios.get(urlForApiCall , {
           params:{
             api_key: this.store.key,
             query: this.store.query,
@@ -45,13 +53,14 @@ export default{
 
     // constolla se ci sono altre pagine da caricare e carica anche la successiva
     loadMore(category){
+      const urlForApiCall = this.getApiCallUrl()
       if (!this.store.query || this.store[category] == null){
         return
       }
       
       if (this.store[category].currentPage < this.store[category].total_pages){
         // se ci sono altre pagine da caricare
-        axios.get(`${this.store.apiUrl}/${category}`, {
+        axios.get(`${urlForApiCall}/${category}`, {
           params:{
             api_key: this.store.key,
             query: this.store.query,
@@ -75,7 +84,7 @@ export default{
     HeaderComponent
   },
   created(){
-    // axios.get(this.generateApiUrl())
+    // axios.get(this.generateapiSearch())
     this.startNewSearch()
   }
 }
