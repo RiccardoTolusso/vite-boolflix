@@ -43,10 +43,15 @@ export default{
           }
         })
         .then((result) => {
-          this.store[category].currentPage = result.data.page;
-          this.store[category].results = result.data.results;
-          this.store[category].total_pages = result.data.total_pages;
-          this.store[category].total_results = result.data.total_results;
+          if (result.data.results.length === 0){
+            this.store[category].foundResults = false
+          } else {
+            this.store[category].foundResults = true
+            this.store[category].currentPage = result.data.page;
+            this.store[category].results = result.data.results;
+            this.store[category].total_pages = result.data.total_pages;
+            this.store[category].total_results = result.data.total_results;
+          }
         })
       })
     },

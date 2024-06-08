@@ -18,14 +18,17 @@ export const store = reactive({
         results: [],
         total_pages: 0,
         total_results: 0,
+        foundResults: true
     },
 
     "tv": {
         currentPage: 0,
         results: [],
         total_pages: 0,
-        total_results: 0
+        total_results: 0,
+        foundResults: true
     },
+
 
     // IMAGES HANDLING
     profileImageUrl: "https://image.tmdb.org/t/p/w185",

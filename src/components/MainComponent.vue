@@ -36,46 +36,55 @@ export default{
 <template>
 <main>
     <div class="container">
+        
 
         <!-- FILMS -->
-        <h2>Film</h2>
-        <ul ref="film">
-            <li v-for="(film, id) in store.movie.results" :key="`film-${id}`" >
-                <PosterComponent 
-                :title="film.title"
-                :original-title="film.original_title"
-                :language="film.original_language"
-                :posterImage="film.poster_path"
-                :usersVote="film.vote_average"
-                :overview="film.overview"
-                @click="() => {
-                    showInfo(film, 'movie')
-                }" />
-            </li>
-            <li>
-                <img class="add-more" src="../images/load-more.jpg" alt="load more image" @click="this.$emit('load-more', 'movie')">
-            </li>
-        </ul>
+        <div class="filmsList" v-if="store.movie.foundResults">
+            <h2>Film</h2>
+            <ul ref="film">
+                <li v-for="(film, id) in store.movie.results" :key="`film-${id}`" >
+                    <PosterComponent 
+                    :title="film.title"
+                    :original-title="film.original_title"
+                    :language="film.original_language"
+                    :posterImage="film.poster_path"
+                    :usersVote="film.vote_average"
+                    :overview="film.overview"
+                    @click="() => {
+                        showInfo(film, 'movie')
+                    }" />
+                </li>
+                <li>
+                    <img class="add-more" src="../images/load-more.jpg" alt="load more image" @click="this.$emit('load-more', 'movie')">
+                </li>
+            </ul>
+        </div>
         
         <!-- TV SHOWS -->
-        <h2>Serie Tv</h2>
-        <ul ref="tvShow">
-            <li v-for="(tvShow, id) in store.tv.results" :key="`tv-show-${id}`">
-                <PosterComponent
-                :title="tvShow.name"
-                :original-title="tvShow.original_name"
-                :langauge="tvShow.original_language"
-                :posterImage="tvShow.poster_path"
-                :usersVote="tvShow.vote_average"
-                :overview="tvShow.overview"
-                @click="() => {
-                    showInfo(tvShow, 'tv')
-                }"
-                />
-            </li>
-            <FullScreenInfoComponent @show-info="showInfo"/>
-        </ul>
-    
+        <div class="showsList" v-if="store.movie.foundResults">
+            <h2>Serie Tv</h2>
+            <ul ref="tvShow">
+                <li v-for="(tvShow, id) in store.tv.results" :key="`tv-show-${id}`">
+                    <PosterComponent
+                    :title="tvShow.name"
+                    :original-title="tvShow.original_name"
+                    :langauge="tvShow.original_language"
+                    :posterImage="tvShow.poster_path"
+                    :usersVote="tvShow.vote_average"
+                    :overview="tvShow.overview"
+                    @click="() => {
+                        showInfo(tvShow, 'tv')
+                    }"
+                    />
+                </li>
+                <FullScreenInfoComponent @show-info="showInfo"/>
+            </ul>
+        </div>
+        
+        <div class="no-results" v-if="!store.tv.foundResults && !store.movie.foundResults">
+            Ops...
+            La tua ricerca non ha prodotto risultati
+        </div>
         
     </div>
 </main>
@@ -146,8 +155,16 @@ main{
         }
         /* END OF LIST OF FILMS*/
 
-        /* FILM INFO */
-        
+        /* NO RESULTS */
+        .no-results{
+
+            color: white;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: calc(2rem + 3vw);
+        }
     }
 
 }
