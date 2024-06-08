@@ -7,8 +7,7 @@ export default{
     name:'Main',
     data(){
         return {
-            store,
-            displayFilmInfo: true
+            store
         }
     },
     components: {
@@ -22,10 +21,11 @@ export default{
             this.$refs.film.scrollTo({top:0, left:0, behaviour:'instant'})
             this.$refs.tvShow.scrollTo({top:0, left:0, behaviour:'instant'})    
         },
-        showInfo(film){
-            console.log(film)
-            this.store.filmToDisplay.defaultData = film
-            this.store.displayFilmInfo = true;
+        showInfo(defaultData, posterType){
+            console.log(defaultData)
+            this.store.posterToDisplay.defaultData = defaultData
+            this.store.posterToDisplay.posterType = posterType
+            this.store.displayPosterInfo = true;
         }
     },
     expose: [ 'resetScroll' ]
@@ -49,7 +49,7 @@ export default{
                 :usersVote="film.vote_average"
                 :overview="film.overview"
                 @click="() => {
-                    showInfo(film)
+                    showInfo(film, 'movie')
                 }" />
             </li>
             <li>
@@ -68,6 +68,9 @@ export default{
                 :posterImage="tvShow.poster_path"
                 :usersVote="tvShow.vote_average"
                 :overview="tvShow.overview"
+                @click="() => {
+                    showInfo(tvShow, 'tv')
+                }"
                 />
             </li>
             <FullScreenInfoComponent @show-info="showInfo"/>

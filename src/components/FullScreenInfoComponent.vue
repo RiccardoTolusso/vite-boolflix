@@ -29,20 +29,21 @@ export default{
     },
     methods: {
         hideInfo(){
-            this.store.displayFilmInfo = false;
+            this.store.displayPosterInfo = false;
         },
         getMovieData(dataType){
-            const movieUrl = this.store.apiMovieUrl 
-            const movieId = this.store.filmToDisplay.defaultData.id
-            if (movieId !== undefined){
+            const posterUrl = this.store.apiPosterInfo  
+            const posterType = this.store.posterToDisplay.posterType
+            const posterId = this.store.posterToDisplay.defaultData.id
+            if (posterId !== undefined){
 
                 const params = {
                     api_key: this.store.key,
                     language: this.store.language,
                 } 
-                axios.get(movieUrl + movieId + "/" + dataType, {params}).then(
+                axios.get(posterUrl + posterType + "/" + posterId + "/" + dataType, {params}).then(
                     (response) => {
-                        this.store.filmToDisplay[dataType] = response.data
+                        this.store.posterToDisplay[dataType] = response.data
     
                     }
                 )
@@ -50,12 +51,12 @@ export default{
         }
     },
     beforeUpdate(){
-        if (this.lastFilmId !== this.store.filmToDisplay.defaultData.id){
+        if (this.lastFilmId !== this.store.posterToDisplay.defaultData.id){
 
             this.getMovieData('recommendations')
             this.getMovieData('credits')
 
-            this.lastFilmId = this.store.filmToDisplay.defaultData.id
+            this.lastFilmId = this.store.posterToDisplay.defaultData.id
         }
     },
     components: {
@@ -67,9 +68,9 @@ export default{
 
 <template>
 
-<div class="film-overlay" v-show="store.displayFilmInfo">
+<div class="film-overlay" v-show="store.displayPosterInfo">
     <!-- BACKGROUND IMAGE -->
-    <img class="background" :src="store.backdropImageUrl + store.filmToDisplay.defaultData.backdrop_path" alt="background image not found">
+    <img class="background" :src="store.backdropImageUrl + store.posterToDisplay.defaultData.backdrop_path" alt="background image not found">
     
     <!-- CROSS TO QUIT -->
     <font-awesome-icon @click="hideInfo" icon="fa-solid fa-xmark" />
@@ -77,13 +78,13 @@ export default{
     <!-- CONTENT SECTION -->
     <div class="overlay">
         <div class="container">
-            <h2>{{ store.filmToDisplay.defaultData.title }}</h2>
-            <h3 v-show="store.filmToDisplay.defaultData.original_title !== store.filmToDisplay.defaultData.title"> {{ `( ${store.filmToDisplay.defaultData.original_title} )` }}</h3>
-            <p> {{ store.filmToDisplay.defaultData.overview }} </p>
+            <h2>{{ store.posterToDisplay.defaultData.title || store.posterToDisplay.defaultData.name }}</h2>
+            <h3 v-show="store.posterToDisplay.defaultData.original_title !== store.posterToDisplay.defaultData.title"> {{ `( ${store.posterToDisplay.defaultData.original_title} )` }}</h3>
+            <p> {{ store.posterToDisplay.defaultData.overview }} </p>
             
             <!-- CAST MEMBERS -->
             <ul class="castList">
-                <li v-for="(member, id) in store.filmToDisplay.credits.cast" v-show="id < 5">
+                <li v-for="(member, id) in store.posterToDisplay.credits.cast" v-show="id < 5">
                     <img :src="this.store.profileImageUrl + member.profile_path" alt="Image not found">
                     <h5>{{ member.name }}</h5>
                 </li>   
@@ -91,7 +92,7 @@ export default{
 
             <!-- SUGGESTED FILMS -->
             <ul class="suggestedList">
-                <li v-for="(film, id) in store.filmToDisplay.recommendations.results" v-show="id < 8" :key="`recommendations-${id}`" >
+                <li v-for="(film, id) in store.posterToDisplay.recommendations.results" v-show="id < 8" :key="`recommendations-${id}`" >
                 <PosterComponent 
                 :title="film.title"
                 :original-title="film.original_title"

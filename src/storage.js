@@ -3,7 +3,7 @@ import { reactive } from 'vue';
 export const store = reactive({
     // API CALL SETTINGS
     apiUrl:"https://api.themoviedb.org/3/search",  
-    apiMovieUrl: "https://api.themoviedb.org/3/movie/",
+    apiPosterInfo: "https://api.themoviedb.org/3/",
     key: "9d0f3fa0c8ae5773b297afa984c0304c",
     categories: ['movie', 'tv'], // movie / tv / multi
     query: "le",
@@ -40,8 +40,9 @@ export const store = reactive({
 
 
     // FULL SCREEN INFO PAGE
-    displayFilmInfo: false,
-    filmToDisplay: {
+    displayPosterInfo: false,
+    posterToDisplay: {
+        posterType: "",
         defaultData: {},
         credits: {},
         recommendations: {}
