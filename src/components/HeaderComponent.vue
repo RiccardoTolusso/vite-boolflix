@@ -31,6 +31,11 @@ export default {
     methods:{
         resetToHomePage(){
             this.store.query = "";
+            this.store.genre = null
+            this.$emit("search-again")
+        },
+        log(event){
+            this.store.genre = event.target.value
             this.$emit("search-again")
         }
     }
@@ -40,8 +45,24 @@ export default {
 <template>
 <header>
     <h1 @click="resetToHomePage">Boolflix</h1>
-    <div>
+    <!-- GENRE SELECT MENU -->
+    <select id="genreMenu" @input="log">
+        <option :value="null">Cerca per titolo</option>
+        <optgroup label="Film & Serie Tv">
+            <option v-for="genre in store.genres.both" :value="genre.id">{{ genre.name }}</option>
+        </optgroup>
+        <optgroup label="Film">
+            <option v-for="genre in store.genres.movie" :value="genre.id">{{ genre.name }}</option>
+        </optgroup>
+        <optgroup label="Serie Tv">
+            <option v-for="genre in store.genres.tv" :value="genre.id">{{ genre.name }}</option>
+        </optgroup>
+    </select>
+    <div v-show="this.store.genre === null">
+        <!-- QUERY INPUT ELEMENT -->
         <input @keydown.enter="$emit('search-again')" type="text" v-model="store.query" >
+
+        <!-- SEARCH BUTTON -->
         <font-awesome-icon icon="fa-solid fa-magnifying-glass"  @click="$emit('search-again')"/>
     </div>
 </header>
@@ -61,6 +82,21 @@ header{
         color: $title-color;
         display: inline-block;
         cursor: pointer;
+    }
+
+    select{
+        background-color: transparent;
+        color: white;
+        font-size: 1.2rem;
+        margin-left: 1rem;
+        padding: 5px 10px;
+        border-radius: 10px;
+
+        option, optgroup{
+            background-color: black;
+        }
+
+        
     }
 
     div{

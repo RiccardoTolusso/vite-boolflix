@@ -11,6 +11,7 @@ export const store = reactive({
     language: 'it-IT',
     page: 1,
     adult: false,
+    genre: null,
 
     // API CALL DATA
     "movie": {
@@ -18,7 +19,6 @@ export const store = reactive({
         results: [],
         total_pages: 0,
         total_results: 0,
-        foundResults: true
     },
 
     "tv": {
@@ -26,9 +26,13 @@ export const store = reactive({
         results: [],
         total_pages: 0,
         total_results: 0,
-        foundResults: true
     },
 
+    genres: {
+        both: [],
+        "movie": [],
+        "tv": []
+    },
 
     // IMAGES HANDLING
     profileImageUrl: "https://image.tmdb.org/t/p/w185",

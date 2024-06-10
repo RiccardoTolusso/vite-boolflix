@@ -26,6 +26,13 @@ export default{
             this.store.posterToDisplay.defaultData = defaultData
             this.store.posterToDisplay.posterType = posterType
             this.store.displayPosterInfo = true;
+        },
+        genresFilteredList(listTOFilter){
+            //TODO: filtra la lista controllando se il genere coincide e restituisce la lista filtrata
+            if (listTOFilter.length === 0){
+                return []
+            }
+            return listTOFilter.filter
         }
     },
     expose: [ 'resetScroll' ]
@@ -39,7 +46,7 @@ export default{
         
 
         <!-- FILMS -->
-        <div class="filmsList" v-if="store.movie.foundResults">
+        <div class="filmsList" v-if="store.movie.results.length > 0">
             <h2>Film</h2>
             <ul ref="film">
                 <li v-for="(film, id) in store.movie.results" :key="`film-${id}`" >
@@ -61,10 +68,10 @@ export default{
         </div>
         
         <!-- TV SHOWS -->
-        <div class="showsList" v-if="store.movie.foundResults">
+        <div class="showsList" v-if="store.tv.results.length > 0">
             <h2>Serie Tv</h2>
             <ul ref="tvShow">
-                <li v-for="(tvShow, id) in store.tv.results" :key="`tv-show-${id}`">
+                <li v-for="(tvShow, id) in store.tv.results" :key="`tv-show-${id}`" >
                     <PosterComponent
                     :title="tvShow.name"
                     :original-title="tvShow.original_name"
@@ -81,7 +88,7 @@ export default{
             </ul>
         </div>
         
-        <div class="no-results" v-if="!store.tv.foundResults && !store.movie.foundResults">
+        <div class="no-results" v-if="store.movie.results.length === 0 && store.tv.results.length === 0">
             Ops...
             La tua ricerca non ha prodotto risultati
         </div>
