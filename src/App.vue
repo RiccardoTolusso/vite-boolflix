@@ -78,7 +78,7 @@ export default{
           include_adult: this.store.adult,
           page: this.store.page
         }
-        if (this.store.genre === null){
+        if (this.store.genre === ""){
           params.query = this.store.query;
         } else {
           params.with_genres = this.store.genre

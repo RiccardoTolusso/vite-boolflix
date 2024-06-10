@@ -61,7 +61,7 @@ export default{
                         showInfo(film, 'movie')
                     }" />
                 </li>
-                <li>
+                <li v-show="store.movie.currentPage < store.movie.total_pages">
                     <img class="add-more" src="../images/load-more.jpg" alt="load more image" @click="this.$emit('load-more', 'movie')">
                 </li>
             </ul>
@@ -75,7 +75,7 @@ export default{
                     <PosterComponent
                     :title="tvShow.name"
                     :original-title="tvShow.original_name"
-                    :langauge="tvShow.original_language"
+                    :language="tvShow.original_language"
                     :posterImage="tvShow.poster_path"
                     :usersVote="tvShow.vote_average"
                     :overview="tvShow.overview"
@@ -84,10 +84,13 @@ export default{
                     }"
                     />
                 </li>
-                <FullScreenInfoComponent @show-info="showInfo"/>
+                <li v-show="store.tv.currentPage < store.tv.total_pages">
+                    <img class="add-more" src="../images/load-more.jpg" alt="load more image" @click="this.$emit('load-more', 'tv')">
+                </li>
             </ul>
         </div>
-        
+        <FullScreenInfoComponent @show-info="showInfo"/>
+                
         <div class="no-results" v-if="store.movie.results.length === 0 && store.tv.results.length === 0">
             Ops...
             La tua ricerca non ha prodotto risultati
@@ -148,6 +151,7 @@ main{
                 img.add-more {
                     height: 0px;
                     min-height: 100%;
+                    max-height: 100%;
                     width: 100%;
                     cursor: pointer;
                     border: 0px;

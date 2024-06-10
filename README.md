@@ -45,12 +45,12 @@ Andando con il mouse sopra una card (on hover), appaiono le informazioni aggiunt
 **FUNZIONI DA IMPLEMENTARE**
 *IN ORDINE DI IMPORTANZA:*
     1. fix the auto scroll to first element on a new search
-    2. quando non ci sono altri film o serie tv da caricare non deve apparire il pulsante
 **WORKING ON**
-    1. Dare la possibilità all'utente di filtrare i film e le serie tv per categoria
+    1. quando non ci sono altri film o serie tv da caricare non deve apparire il pulsante
 
 
 **DONE**
     1. Al click sulle card delle serie tv si deve comportare come per i film
     2. All'apertura del sito o quando si preme il logo boolfix dovrebbe mostrare i film e le serie tv più popolari al momento
     3. Quando il riusltato della ricerca è nullo visualizzare una schermata apposita
+    4. Dare la possibilità all'utente di cercare i film e le serie tv per categoria

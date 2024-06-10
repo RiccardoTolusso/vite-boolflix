@@ -41,10 +41,10 @@ export const store = reactive({
 
 
     // LISTS OF AVAILABLE FLAGS
-    flags:{
-        it: "it.svg",
-        en: "en.svg",
-    },
+    flags: [
+        'it',
+        'en'
+    ],
 
 
     // FULL SCREEN INFO PAGE

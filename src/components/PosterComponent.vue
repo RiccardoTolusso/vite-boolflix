@@ -41,16 +41,6 @@ export default{
         roundedVote(){
             // porto il numero in scala 1 a 5 e lo arrotondo per eccesso
             return Math.ceil(this.usersVote/2);
-        },
-        flagExist(){
-            // controlla se esiste una bandiera nello store per la lingua di riferimento
-            const flag = this.store.flags[this.language]
-            if (flag != null){
-                return true 
-            }
-            else{
-                return false
-            }
         }
     },
     methods:{
@@ -62,6 +52,11 @@ export default{
                 this.shownTitle = this.title
             }
             console.log("switch")
+        },
+        getFlagUrl(img){
+            // controlla se esiste una bandiera nello store per la lingua di riferimento
+            const result = new URL(`../images/flags_svg/${img}.svg`, import.meta.url).href
+            return result
         }
     },
     beforeUpdate(){
@@ -86,7 +81,7 @@ export default{
             <p> {{ overview }} </p>
 
             <!-- BANDIERA O TESTO DELLA LINGUA -->
-            <img class="lang" v-if="flagExist" :src="this.flagsUrl + this.store.flags[this.language]"/>
+            <img class="lang" v-if="this.store.flags.includes(this.language)" :src="getFlagUrl(this.language)"/>
             <div class="lang" v-else>{{ this.language }}</div>
     
             <!-- STARS -->
