@@ -11,7 +11,7 @@ export const store = reactive({
     language: 'it-IT',
     page: 1,
     adult: false,
-    genre: null,
+    genre: "",
 
     // API CALL DATA
     "movie": {

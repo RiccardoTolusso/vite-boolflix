@@ -31,12 +31,19 @@ export default {
     methods:{
         resetToHomePage(){
             this.store.query = "";
-            this.store.genre = null
+            this.store.genre = "";
             this.$emit("search-again")
         },
         log(event){
-            this.store.genre = event.target.value
-            this.$emit("search-again")
+            console.dir(event.target)
+            console.log(event)
+            // TO FIX: non mi da il valore corretto quando è null
+            if (event.target.value === ""){
+                this.resetToHomePage()
+            } else {
+                this.store.genre = event.target.value
+                this.$emit("search-again")
+            }
         }
     }
 }
@@ -46,19 +53,19 @@ export default {
 <header>
     <h1 @click="resetToHomePage">Boolflix</h1>
     <!-- GENRE SELECT MENU -->
-    <select id="genreMenu" @input="log">
-        <option :value="null">Cerca per titolo</option>
+    <select id="genreMenu" @input="log" v-model="store.genre">
+        <option value="">Cerca per titolo</option>
         <optgroup label="Film & Serie Tv">
-            <option v-for="genre in store.genres.both" :value="genre.id">{{ genre.name }}</option>
+            <option v-for="genre in store.genres.both" :value="genre.id" :key="genre.id">{{ genre.name }}</option>
         </optgroup>
         <optgroup label="Film">
-            <option v-for="genre in store.genres.movie" :value="genre.id">{{ genre.name }}</option>
+            <option v-for="genre in store.genres.movie" :value="genre.id" :key="genre.id">{{ genre.name }}</option>
         </optgroup>
         <optgroup label="Serie Tv">
-            <option v-for="genre in store.genres.tv" :value="genre.id">{{ genre.name }}</option>
+            <option v-for="genre in store.genres.tv" :value="genre.id" :key="genre.id">{{ genre.name }}</option>
         </optgroup>
     </select>
-    <div v-show="this.store.genre === null">
+    <div v-show="this.store.genre === ''">
         <!-- QUERY INPUT ELEMENT -->
         <input @keydown.enter="$emit('search-again')" type="text" v-model="store.query" >
 

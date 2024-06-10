@@ -56,7 +56,7 @@ export default{
       )
     },
     getApiCallUrl(category){
-      if (this.store.genre !== null){
+      if (this.store.genre !== ""){
         return this.store.apiPosterInfo + 'discover/' + category
       }
       if (this.store.query === ""){
@@ -85,6 +85,7 @@ export default{
         }
         axios.get(urlForApiCall , { params })
         .then((result) => {
+          console.log(result)
           if (result.data.results.length === 0){
             this.store[category].results = []
           } else {
