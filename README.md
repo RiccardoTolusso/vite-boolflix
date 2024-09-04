@@ -40,7 +40,7 @@ Andando con il mouse sopra una card (on hover), appaiono le informazioni aggiunt
  - al click sui suggeriti la pagina di INFO passa al film cliccato
 
 **TO FIX**
-    1. non aggiorna più le serie tv quando si fa una ricerca  
+    1. quando clicco su carica altri mentre sono in ricerca per categoria i risultati non sono quelli corretti
 
 **FUNZIONI DA IMPLEMENTARE**
 *IN ORDINE DI IMPORTANZA:*
@@ -54,3 +54,4 @@ Andando con il mouse sopra una card (on hover), appaiono le informazioni aggiunt
     2. All'apertura del sito o quando si preme il logo boolfix dovrebbe mostrare i film e le serie tv più popolari al momento
     3. Quando il riusltato della ricerca è nullo visualizzare una schermata apposita
     4. Dare la possibilità all'utente di cercare i film e le serie tv per categoria
+    5. non aggiorna più le serie tv quando si fa una ricerca  

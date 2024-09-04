@@ -138,8 +138,22 @@ main{
             overflow-y: hidden;
             scroll-snap-type: x;
 
+            &::-webkit-scrollbar-track{
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+                border-radius: 10px;
+                background-color: #0000;
+            }
+
             &::-webkit-scrollbar{
-                display: none;
+                width: 12px;
+                height: 10px;
+            	background-color: #0000;
+            }
+
+            &::-webkit-scrollbar-thumb{
+                border-radius: 10px;
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+                background-color: #ffffff;
             }
 
             /* FILM CONTAINER */
